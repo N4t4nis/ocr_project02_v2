@@ -10,7 +10,7 @@ soup = BeautifulSoup(reponse.text, "html.parser")
 titre = soup.find('h1')
 scrap_image_url = soup.find("div", {"class" :"item active"}).find("img")
 image_url = "http://books.toscrape.com" + scrap_image_url.get("src")[5:]
-dossier = b'C:/Users/N4t4nistorus/Documents/ocr_parcours/ocr_project02/images_download/' + str.encode(titre.text) + b'.jpg'
+dossier = b'../../../Desktop/images_download/' + str.encode(titre.text) + b'.jpg'
 r = requests.get(image_url, stream=True)
 
 with open(dossier, "wb") as jpg_test:
@@ -18,6 +18,5 @@ with open(dossier, "wb") as jpg_test:
 
 
 print('\n', dossier)
-
 print(r.headers.get('content-type'))
 print(image_url)
