@@ -106,3 +106,4 @@ for category in all_category():
             write = jpg_test.write(r.content)
             pprint(titre.text)
     liens_produits.clear()
+#test

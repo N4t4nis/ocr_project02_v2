@@ -20,3 +20,5 @@ with open(dossier, "wb") as jpg_test:
 print('\n', dossier)
 print(r.headers.get('content-type'))
 print(image_url)
+
+#test
