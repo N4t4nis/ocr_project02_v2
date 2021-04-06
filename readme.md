@@ -2,6 +2,11 @@ Programme qui consiste à scrapper le site booktoscrap. Ce programme extrait le 
 et l'exporte dans un fichier CSV différent pour chaque catégorie de livre, puis il télécharge les images de chaque livre
 dans un seul fichier.
 
+1. Créer un environnement virtuel : python3  -m venv [nom]*
+2. activer l'environnement virtuel : source env/bin/activate
+3. Désactiver l'environnement virtuel : deactivate
+4. Supprimer un virtualenv : rm -r env/
+
 Pour éxécuter ce programme :
 	- lancez main.py avec votre editeur de text et lancer l'execution
 Pour executer votre programme depuis un terminal:
