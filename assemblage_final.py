@@ -1,13 +1,9 @@
+#! /usr/bin/python3.8
+# coding: utf-8
 import csv
 import requests
 from bs4 import BeautifulSoup
 from pprint import pprint
-
-
-# biblio flake8
-# git ignore ou git keep
-# les 2 dossier doivent etre dans le github mais vide (dit ignore ou git keep)
-# processus damelioration pour la soutenance : mltithread
 
 # les listes
 list_all_category = []
@@ -21,7 +17,7 @@ def all_category():
     i = 0
     url_category = soup.find("ul", {"class": "nav nav-list"}).findAll("a")
     for url in url_category:
-        if i != 0 and i < 2:
+        if i != 0:
             list_all_category.append("http://books.toscrape.com/" + url.get("href"))
         i += 1
     return list_all_category
@@ -58,9 +54,6 @@ def scrap_1_category(category):
 def infos_produits(lien):
     reponse_lien_prod = requests.get(lien)
     soup = BeautifulSoup(reponse_lien_prod.text, "html.parser")
-    # global titre
-    # global scrap_image_url
-    # global image_url
     titre = soup.find("h1")
     scrap_image_url = soup.find("div", {"class": "item active"}).find("img")
     image_url = "http://books.toscrape.com" + scrap_image_url.get("src")[5:]
@@ -88,7 +81,7 @@ def infos_produits(lien):
         image_url + " Tag: " + alt_image,
     ]
     # télécharge toutes les images dans un dossier, avec leurs nom
-    dossier = b"images_download/" + str.encode(titre.text) + b".jpg"
+    dossier = b"images_download/" + str.encode(titre.text.replace("/", "_")) + b".jpg"
     r = requests.get(image_url, stream=True)
     with open(dossier, "wb") as jpg_test:
         jpg_test.write(r.content)
@@ -99,10 +92,21 @@ def infos_produits(lien):
 # Fonction qui télécharge les données dans un dossier csv différent pour chaques catégories
 def csv_category(category):
     liste = scrap_1_category(category)
-    print("contient :", len(liste), "livres")
+    print("Contient :", len(liste), "livres")
     nom = category[51:-11]
-    print("Nom de la categorie : ")
     dossier = "csv_category/"
+    csv_columns = [
+        "product_page_url",
+        "universal_ product_code (upc)",
+        "title",
+        "price_including_tax",
+        "price_excluding_tax",
+        "number_available",
+        "product_description",
+        "category",
+        "review_rating",
+        "image_url",
+    ]
     with open(dossier + nom + ".csv", "w", encoding="utf-8", newline="") as csv_file:
         write = csv.writer(csv_file)
         write.writerow(csv_columns)
@@ -112,24 +116,15 @@ def csv_category(category):
     return liste
 
 
-csv_columns = [
-    "product_page_url",
-    "universal_ product_code (upc)",
-    "title",
-    "price_including_tax",
-    "price_excluding_tax",
-    "number_available",
-    "product_description",
-    "category",
-    "review_rating",
-    "image_url",
-]
 
 
 def main():
+    i = 1
     for category in all_category():
+        print("Categorie numero", i)
         csv_category(category)
         liens_produits.clear()
+        i += 1
 
 
 main()

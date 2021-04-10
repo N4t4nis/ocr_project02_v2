@@ -10,6 +10,7 @@ dans un seul fichier.
 [télécharger python](https://www.python.org/downloads/)
 
 ### Lancer l'environnement virtuel
+*Dans le dossier du projet, depuis le terminal:*
 1. Activer l'environnement virtuel : source venv/Scripts/activate
 2. Désactiver l'environnement virtuel : deactivate
 
@@ -21,9 +22,9 @@ dans un seul fichier.
  
 ### Executer le programme
 
-Lancer main.py avec votre éditeur de text et lancer l'exécution
+Lancer assemblage_final.py avec votre éditeur de text et lancer l'exécution
 
 **Pour executer votre programme depuis un terminal:**
-1. aller dans le dossier du programme 
-2. tapez la commande `python3 main.py"`
+1. Aller dans le dossier du programme 
+2. Taper la commande `python3 assemblage_final.py"`
 
